@@ -1,0 +1,14 @@
+database blog {
+	table post {
+		id : integer(11) primary_key auto_increment
+		user_id : integer(11) nullable refer_to user.id
+		title : varchar(30)
+		content : text
+	}
+	
+	table user {
+		id : integer(11) primary_key
+		username : varchar(15)
+		password : varchar(15)
+	}
+}
