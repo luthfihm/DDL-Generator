@@ -25,7 +25,19 @@ public class GeneratorController {
         List<String> errors = parser.getErrors();
         if (errors.size() == 0)
             return new ResponseEntity<String>(ddlCode, HttpStatus.OK);
-        else
-            return new ResponseEntity<String>(errors.size()+" error(s) was found", HttpStatus.BAD_REQUEST);
+        else{
+            StringBuilder results = new StringBuilder().append("[");
+            int i=1;
+            for (String error : errors) {
+                results.append("\"").append(error).append("\"");
+                if (i < errors.size())
+                    results.append(",");
+                else
+                    results.append("]");
+                i++;
+            }
+            return new ResponseEntity<String>(results.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
+

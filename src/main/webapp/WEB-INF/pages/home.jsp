@@ -66,9 +66,15 @@
                     error: function (response) {
                         console.log("error");
                         console.log(response.responseText);
+                        var errors = JSON.parse(response.responseText);
                         $("#loading").hide();
-                        $("#error-msg").html(response.responseText);
+                        $("#error-msg").html(errors.length+" error(s) found!");
                         $("#error-msg").show();
+                        var results = "";
+                        $.each(errors, function (i, error) {
+                            results += error+"\n";
+                        });
+                        $("#ddl-code").val(results);
                     }
                 })
             });
